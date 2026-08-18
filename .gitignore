@@ -1,0 +1,40 @@
+# Compiled Object files and Static/Dynamic Libraries
+# (These are the "hardware" files created when you compile)
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dll
+*.dylib
+
+# Executables
+# (The actual programs that run)
+*.exe
+*.out
+*.app
+
+# Build Directories
+# (Folders created by compilers like CMake or Make)
+build/
+[Bb]uild/
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+
+# IDE and Editor Configs
+# (Personal settings for your coding software - you don't want to force your settings on someone else)
+.vscode/
+.idea/
+.vs/
+*.swp
+*~
+.DS_Store
+
+# MATLAB Migration Artifacts
+# (Since you are migrating from MATLAB, you likely have these old files lying around. Keep them out of GitHub)
+*.mat
+*.asv
+*.mex*
+slprj/
