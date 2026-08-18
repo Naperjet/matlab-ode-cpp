@@ -3,6 +3,9 @@
 ## Abstract
 This repository contains a custom C++ Ordinary Differential Equation (ODE) solver suite and a purpose-built linear algebra library, designed to bridge the gap between high-level prototyping and deterministic Software-in-the-Loop (SIL) pipelines for aerospace Guidance, Navigation, and Control (GNC). By implementing explicit and implicit Runge-Kutta methods with strict memory and precision controls, this suite provides bit-level reproducibility and real-time performance guarantees absent in standard auto-generated MATLAB-to-C++ pipelines.
 
+Visit GitLab for actual development timeline and standalone files
+GitLab Link:[https://www.gitlab.com/naperjet/matlab-ode-cpp]
+
 ## The Core Problem
 In aerospace GNC development, dynamic models are typically prototyped in MATLAB/Simulink. Transitioning these models to C++ for SIL or Hardware-in-the-Loop (HIL) integration often introduces pipeline inconsistencies, primarily stemming from dynamic memory allocation and floating-point corruption.
 
