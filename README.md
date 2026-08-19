@@ -5,7 +5,7 @@ This repository contains a custom C++ Ordinary Differential Equation (ODE) solve
 
 Visit GitLab for actual development timeline and standalone files
 
-GitLab Link:[https://www.gitlab.com/naperjet/matlab-ode-cpp]
+[GitLab Link](https://www.gitlab.com/naperjet/matlab-ode-cpp)
 
 ## The Core Problem
 In aerospace GNC development, dynamic models are typically prototyped in MATLAB/Simulink. Transitioning these models to C++ for SIL or Hardware-in-the-Loop (HIL) integration often introduces pipeline inconsistencies, primarily stemming from dynamic memory allocation and floating-point corruption.
