@@ -1,0 +1,20 @@
+# Lin-Alg
+
+This is a sub-library made specifically to be used in conjunction with stiff solvers present in the library.
+
+Kindly read through the README document of the library.
+
+This library is meant to support the use of the solvers in the linked library but can be utilized solo.
+
+
+## Disclaimer
+
+This project and the project aforementioned are not affliated or endorsed by Mathworks.
+This is an independent open source project free to be used with attribution.
+
+
+## Description
+
+The library is based purely on C++ Standard Template to be used without any external dependencies.
+
+The code repositories are part of a professional academic portfolio. Unauthorized use of code for training machine learning models or LLMs is strictly prohibited.
