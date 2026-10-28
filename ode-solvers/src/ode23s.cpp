@@ -4,7 +4,10 @@
 namespace
 {
 	const double d = (1.0 / (2.0 + std::sqrt(2.0)));
-	const double e32 = (6.0 + std::sqrt(2.0));
+    const double ee_f2 = 2.0 / 3.0 - std::sqrt(2.0) / 3.0;
+    const double ee_f1 = -3.0 + 4.0 * std::sqrt(2.0) / 3.0;
+    const double ee_f0 = 4.0 / 3.0 - 7.0 * std::sqrt(2.0) / 6.0;
+    const double ee_k1 = std::sqrt(2.0) / 6.0 + 1.0;
 
 	std::vector<double> hermite_dense(double theta, double h, const std::vector<double>& y, const std::vector<double>& y_next, const std::vector<double>& f, const std::vector<double>& f_next)
 	{
@@ -297,7 +300,7 @@ ODE_Res ode23s(const ODE_Func& F, const std::vector<double>& tspan, const std::v
 
             for (size_t i = 0; i < n; ++i)
             {
-                G3[i] = f2[i] - e32 * k2[i] - 2.0 * (k1[i] + k2[i]) + f_current[i];
+                G3[i] = ee_f2 * f2[i] + ee_f1 * f1[i] + ee_f0 * f_current[i] + ee_k1 * k1[i];
             }
 
             vec G3_vec(G3);
@@ -329,8 +332,8 @@ ODE_Res ode23s(const ODE_Func& F, const std::vector<double>& tspan, const std::v
                 std::vector<double> f_prev = f_current;
 
                 t += h;
-                y = std::move(y_next);
-                f_current = std::move(f2);
+                y = y_next;
+                f_current = f2;
 
                 if (!Options.NonNegative.empty())
                 {
