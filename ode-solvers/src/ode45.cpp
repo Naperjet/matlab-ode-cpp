@@ -4,22 +4,38 @@ namespace
 {
 	std::vector<double> dopri5_dense(double theta, double h, const std::vector<double>& y, const std::vector<double>& y_next, const std::vector<std::vector<double>>& k)
 	{
+
+		static const double P[7][4] =
+		{
+			{  1.0,                     -8048581381.0 / 2820520608.0,   8663915743.0 / 2820520608.0,  -12715105075.0 / 11282082432.0 },
+			{  0.0,                      0.0,                          0.0,                          0.0                       },
+			{  0.0,                    131558114200.0 / 32700410799.0, -68118460800.0 / 10900136933.0,  87487479700.0 / 32700410799.0 },
+			{  0.0,                     -1754552775.0 / 470086768.0,    14199869525.0 / 1410260304.0,   -10690763975.0 / 1880347072.0 },
+			{  0.0,                    127303824393.0 / 49829197408.0, -318862633887.0 / 49829197408.0, 701980252875.0 / 199316789632.0 },
+			{  0.0,                     -282668133.0 / 205662961.0,      2019193451.0 / 616988883.0,    -1453857185.0 / 822651844.0   },
+			{  0.0,                     40617522.0 / 29380423.0,        -110615467.0 / 29380423.0,       69997945.0 / 29380423.0      }
+		};
+
 		const double th2 = theta * theta;
 		const double th3 = th2 * theta;
-		const double om = 1.0 - theta;
+		const double th4 = th3 * theta;
 
-		const double d1 = theta * (1.0 + theta * (-1337.0 / 480.0 + theta * (1039.0 / 360.0 - theta * 1163.0 / 1152.0)));
-		const double d3 = th2 * (500.0 / 1113.0 + theta * (-1000.0 / 741.0 + theta * 125.0 / 148.0));
-		const double d4 = th2 * (-125.0 / 192.0 + theta * (3875.0 / 4032.0 + theta * (-2375.0 / 16128.0)));
-		const double d5 = th2 * (2187.0 / 6784.0 + theta * (-729.0 / 1408.0 + theta * 729.0 / 22528.0));
-		const double d6 = th2 * (-11.0 / 84.0 + theta * (11.0 / 56.0 - theta * 11.0 / 224.0));
-		const double d7 = th3 * om;
+		double coeff[7];
+		for (int s = 0; s < 7; ++s)
+		{
+			coeff[s] = P[s][0] * theta + P[s][1] * th2 + P[s][2] * th3 + P[s][3] * th4;
+		}
 
 		size_t n = y.size();
 		std::vector<double> interp(n);
 		for (size_t i = 0; i < n; ++i)
 		{
-			interp[i] = y[i] + h * (d1 * k[0][i] + d3 * k[2][i] + d4 * k[3][i] + d5 * k[4][i] + d6 * k[5][i] + d7 * k[6][i]);
+			double acc = 0.0;
+			for (int s = 0; s < 7; ++s)
+			{
+				acc += coeff[s] * k[s][i];
+			}
+			interp[i] = y[i] + h * acc;
 		}
 
 		return interp;
@@ -44,7 +60,7 @@ namespace
 	}
 }
 
-ODE_Res ode45(const ODE_Func& F, const std::vector<double>& tspan, const std::vector<double>& Init_Value, const ODE_Set& Options = ODE_Set{})
+ODE_Res ode45(const ODE_Func& F, const std::vector<double>& tspan, const std::vector<double>& Init_Value, const ODE_Set& Options)
 {
 	if (tspan.size() < 2)
 	{
