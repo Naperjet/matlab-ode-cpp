@@ -115,4 +115,4 @@ struct ODE_Set_Long
 
 ODE_Func_Long ode_fcn_long(User_Math_Long custom_equation);
 ODE_Res_Long ode113_long(const ODE_Func_Long& F, const std::vector<long double>& tspan, const std::vector<long double>& Init_Value, const ODE_Set_Long& Options = ODE_Set_Long{});
-ODE_Res ode89(const ODE_Func_Long& F, const std::vector<long double>& tspan, const std::vector<long double>& Init_Value, const ODE_Set_Long& Options = ODE_Set_Long{});
+ODE_Res_Long ode89(const ODE_Func_Long& F, const std::vector<long double>& tspan, const std::vector<long double>& Init_Value, const ODE_Set_Long& Options = ODE_Set_Long{});
