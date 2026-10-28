@@ -771,7 +771,7 @@ namespace
 }
 
 
-ODE_Res ode78(const ODE_Func& F, const std::vector<double>& tspan, const std::vector<double>& Init_Value, const ODE_Set& Options = ODE_Set{})
+ODE_Res ode78(const ODE_Func& F, const std::vector<double>& tspan, const std::vector<double>& Init_Value, const ODE_Set& Options)
 {
 	if (tspan.size() < 2)
 	{
@@ -781,12 +781,12 @@ ODE_Res ode78(const ODE_Func& F, const std::vector<double>& tspan, const std::ve
 	bool increasing = (tspan[0] <= tspan[1]);
 	for (size_t i = 1; i < tspan.size(); ++i)
 	{
-		if (increasing && tspan[i] <= tspan[i - 1])
+		if (increasing && tspan[i] < tspan[i - 1])
 		{
 			throw std::invalid_argument("ode78: Tspan must be strictly increasing");
 		}
 
-		if (!increasing && tspan[i] >= tspan[i - 1])
+		if (!increasing && tspan[i] > tspan[i - 1])
 		{
 			throw std::invalid_argument("ode78: Tspan must be strictly decreasing");
 		}
