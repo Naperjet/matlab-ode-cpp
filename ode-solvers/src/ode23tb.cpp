@@ -11,10 +11,10 @@ namespace
 
 	std::vector<double> trbdf2_dense(double theta, double h, const std::vector<double>& y, const std::vector<double>& y_mid, const std::vector<double>& y_next, const std::vector<double>& f, const std::vector<double>& f_mid, const std::vector<double>& f_next)
 	{
-		double c1d = theta * theta * (1.0 - theta) / (d * d * (1.0 - d));
-		double c2d = theta * theta * (theta - d) / (1.0 - d);
-		double c3d = theta * (1.0 - theta) * (d - theta) / d;
-		double c0 = 1.0 - c1d - c2d - c3d;
+		double c1d = theta * theta * (theta - 1.0) / (d * d * (d - 1.0));
+		double c2d = theta * theta * (d - theta) / (d - 1.0);
+		double c3d = -theta * (d - theta) * (theta - 1.0) / d;
+		double c0 = -(d - theta) * (theta - 1.0) * (d * theta + d + theta) / (d * d);
 
 		size_t n = y.size();
 		std::vector<double> interp(n);
@@ -189,8 +189,6 @@ ODE_Res ode23tb(const ODE_Func& F, const std::vector<double>& tspan, const std::
 			h = tf - t;
 		}
 
-		double h_d = d * h;
-
 		bool step_accepted = false;
 
 		while (!step_accepted)
@@ -199,6 +197,9 @@ ODE_Res ode23tb(const ODE_Func& F, const std::vector<double>& tspan, const std::
 			{
 				throw std::runtime_error("ode23tb: step size too small; failed to converge to acceptable tolerances");
 			}
+
+
+			double h_d = d * h;
 
 			if (needs_jac)
 			{
@@ -391,8 +392,8 @@ ODE_Res ode23tb(const ODE_Func& F, const std::vector<double>& tspan, const std::
 				std::vector<double> f_prev = f_current;
 
 				t += h;
-				y = std::move(y_next);
-				f_current = std::move(f_next);
+				y = y_next;
+				f_current = f_next;
 
 				if (!Options.NonNegative.empty())
 				{
