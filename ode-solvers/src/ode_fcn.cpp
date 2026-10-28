@@ -1,22 +1,25 @@
 #include "ode-suite.hpp"
 
-ODEFunc ode_fcn(UserMath custom_equation)
+
+ODE_Func ode_fcn(User_Math custom_equation)
 {
-    ODEFunc F = [custom_equation](double t, const std::vector<double>& y)
-    {
-        size_t n = y.size();
+	return [eq = std::move(custom_equation)](double t, const std::vector<double>& y)
+	{
+		if (y.empty())
+		{
+			throw std::invalid_argument("ode_fcn: State vector is empty");
+		}
 
-        std::vector<double> dydt(n);
+		size_t n = y.size();
+		std::vector<double> dydt(n);
 
-        for (int i = 0; i < n - 1; i++)
-        {
-            dydt[i] = y[i + 1];
-        }
+		for (size_t i = 0; i + 1 < n; ++i)
+		{
+			dydt[i] = y[i + 1];
+		}
 
-        dydt[n - 1] = custom_equation(t,y);
+		dydt[n - 1] = eq(t, y);
 
-        return dydt;
-    };
-
-    return F;
+		return dydt;
+	};
 }
