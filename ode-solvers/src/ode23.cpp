@@ -40,7 +40,7 @@ namespace
 	}
 }
 
-ODE_Res ode23(const ODE_Func& F, const std::vector<double>& tspan, const std::vector<double>& Init_Value, const ODE_Set& Options = ODE_Set{})
+ODE_Res ode23(const ODE_Func& F, const std::vector<double>& tspan, const std::vector<double>& Init_Value, const ODE_Set& Options)
 {
 	if (tspan.size() < 2)
 	{
