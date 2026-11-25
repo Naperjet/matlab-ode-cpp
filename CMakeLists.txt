@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.12)
 project(matlab-ode-cpp CXX)
 
 # Set C++ standard to C++20
