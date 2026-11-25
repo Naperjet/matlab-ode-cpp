@@ -61,7 +61,7 @@ ODE_Res ode113(const ODE_Func& F, const std::vector<double>& tspan, const std::v
 	}
 
 	bool increasing = (tspan[1] > tspan[0]);
-	for (size_t i = 0; i < tspan.size(); ++i)
+	for (size_t i = 1; i < tspan.size(); ++i)
 	{
 		if (increasing && tspan[i] < tspan[i - 1])
 		{
