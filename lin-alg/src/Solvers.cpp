@@ -66,7 +66,7 @@ void lu_factor(mat& A, std::vector<size_t>& pivot_indices)
 	}
 }
 
-vec lu_solver(const mat& LU, const std::vector<size_t>& pivot_indices, const vec& b)
+vec lu_solve(const mat& LU, const std::vector<size_t>& pivot_indices, const vec& b)
 {
 	size_t n = LU.rows;
 	vec x(n);
