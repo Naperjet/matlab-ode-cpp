@@ -5,7 +5,7 @@ file(GLOB ODE_HEADERS CONFIGURE_DEPENDS include/*.hpp)
 add_library(ode-solvers STATIC ${ODE_SRC})
 
 # Link the custom linear algebra library
-target_link_libraries(ode-solvers PUBLIC linalg)
+target_link_libraries(ode-solvers PUBLIC lin-alg)
 
 # Expose ODE headers
 target_include_directories(ode-solvers PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
