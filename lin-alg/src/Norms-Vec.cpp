@@ -48,5 +48,5 @@ double norm_wts(const vec& v, const vec& weights)
 
 vec operator*(double scalar, const vec& v)
 {
-	return scalar * v;
+	return v * scalar;
 }
