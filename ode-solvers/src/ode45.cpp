@@ -1,5 +1,7 @@
 #include "ode-suite.hpp"
 
+#include <string>
+
 namespace
 {
 	std::vector<double> dopri5_dense(double theta, double h, const std::vector<double>& y, const std::vector<double>& y_next, const std::vector<std::vector<double>>& k)
