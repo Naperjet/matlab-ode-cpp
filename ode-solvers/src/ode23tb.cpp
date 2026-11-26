@@ -509,7 +509,7 @@ ODE_Res ode23tb(const ODE_Func& F, const std::vector<double>& tspan, const std::
 					}
 				}
 
-				double scale = 0.9 * std::pow(1.0 / std::max(error_norm, 1e-10), 1.0 / 3.0);
+				double scale = 0.9 * std::pow(1.0 / std::max(error_norm, 1e-10), 1.0 / 2.0);
 				scale = std::clamp(scale, 0.2, 2.0);
 
 				double h_new = std::min(std::abs(h * scale), h_max);
@@ -534,7 +534,7 @@ ODE_Res ode23tb(const ODE_Func& F, const std::vector<double>& tspan, const std::
 					res.stats.nfailed++;
 				}
 
-				double scale = 0.9 * std::pow(1.0 / error_norm, 1.0 / 3.0);
+				double scale = 0.9 * std::pow(1.0 / error_norm, 1.0 / 2.0);
 				scale = std::max(scale, 0.1);
 				h *= scale;
 				needs_fac = true;
