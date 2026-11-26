@@ -9,12 +9,12 @@ size_t vec::size() const
     return data.size();
 }
 
-double& vec::operator[](int i)
+double& vec::operator[](size_t i)
 {
     return data[i];
 }
 
-const double& vec::operator[](int i) const
+const double& vec::operator[](size_t i) const
 {
     return data[i];
 }
